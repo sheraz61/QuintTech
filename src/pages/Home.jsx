@@ -1,15 +1,10 @@
 // src/pages/Home.jsx
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { FaRocket, FaMobileAlt, FaCloud, FaDatabase, FaArrowRight, FaQuoteLeft } from "react-icons/fa";
-import ServiceCard from "../components/ServiceCard"; 
-/**
- * Improved Home page:
- * - Better hero contrast and controlled gradient fade so text remains readable
- * - Colorful service cards with "See all services" CTA
- * - Project cards with stronger visuals
- * - Testimonial cards with quote icon and accent
- */
+import ServicesSection from "../components/HomeService";
+import { FaQuoteLeft } from "react-icons/fa";
+import Hero from "../components/Hero";
+
 
 export default function Home() {
   const [mounted, setMounted] = useState(false);
@@ -17,41 +12,6 @@ export default function Home() {
     const t = setTimeout(() => setMounted(true), 50);
     return () => clearTimeout(t);
   }, []);
-
- const services = [
-  {
-    id: 1,
-    title: "Web Applications",
-    desc: "MERN & Next.js apps — fast, accessible and SEO-friendly.",
-    icon: <FaRocket className="w-5 h-5" />,
-    from: "#6366f1", // indigo-500
-    to: "#8b5cf6",   // violet-500
-  },
-  {
-    id: 2,
-    title: "Mobile Apps",
-    desc: "Cross-platform apps with native feel and performance.",
-    icon: <FaMobileAlt className="w-5 h-5" />,
-    from: "#f59e0b", // amber-500
-    to: "#fb923c",   // orange-400
-  },
-  {
-    id: 3,
-    title: "Cloud & DevOps",
-    desc: "CI/CD, IaC, monitoring and scalable cloud architecture.",
-    icon: <FaCloud className="w-5 h-5" />,
-    from: "#06b6d4", // cyan-500
-    to: "#0ea5e9",   // sky-500
-  },
-  {
-    id: 4,
-    title: "Data & ML",
-    desc: "Analytics, pipelines and ML prototypes for quick wins.",
-    icon: <FaDatabase className="w-5 h-5" />,
-    from: "#d946ef", // fuchsia-500
-    to: "#fb7185",   // rose-400
-  },
-];
 
   const projects = [
     { id: 1, title: "AutoTrade Finder", summary: "Aggregator with repair & profit estimator + Airtable sync.", tags: ["React", "Node", "Scraping"] },
@@ -62,194 +22,111 @@ export default function Home() {
   return (
     <main className="relative">
       {/* HERO */}
-    <section className="relative overflow-hidden">
-  {/* Responsive gradient background */}
-  <div className="absolute inset-0 -z-20">
-    <div className="h-full md:h-[700px] min-h-screen bg-gradient-to-b from-indigo-800 via-violet-700 to-violet-600 opacity-95" />
-    {/* soft bottom fade */}
-    <div className="absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-white/95 to-transparent pointer-events-none" />
-  </div>
-
-  <div className="max-w-7xl mx-auto md:mt-8 mt-12 px-6 pt-16 md:pt-24 pb-16 md:pb-20 relative z-10">
-    <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
-      {/* Left - text */}
-      <div
-        className={`md:col-span-7 py-3 ${
-          mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
-        } transition-all duration-700`}
-      >
-        <div className="inline-flex items-center gap-3 bg-white/10 px-3 py-1 rounded-full text-sm font-medium text-white/90 w-max backdrop-blur-sm border border-white/20">
-          Trusted engineering partner
-        </div>
-
-        <h1 className="mt-6 text-4xl md:text-5xl leading-tight font-manrope font-extrabold text-white drop-shadow-lg">
-          We build digital products that scale — fast, secure & delightful.
-        </h1>
-
-        <p className="mt-4 max-w-2xl text-lg text-white/85 drop-shadow-sm">
-          Quint Tech delivers production-ready web and mobile apps with clear
-          roadmaps, measurable outcomes, and ongoing support.
-        </p>
-
-        <div className="mt-6 flex flex-col sm:flex-row gap-3">
-          <Link
-            to="/contact"
-            className="inline-flex items-center gap-3 px-5 py-3 rounded-md bg-gradient-to-r from-indigo-500 to-violet-500 text-white font-medium shadow-lg hover:scale-[1.02] transition"
-          >
-            Get a Quote <FaArrowRight className="w-4 h-4" />
-          </Link>
-
-          <Link
-            to="/portfolio"
-            className="inline-flex items-center gap-3 px-5 py-3 rounded-md border border-white/20 text-white/90 hover:bg-white/5 transition"
-          >
-            View Portfolio
-          </Link>
-        </div>
-
-        <ul className="mt-6 flex flex-wrap gap-4 text-sm text-white/80">
-          <li className="inline-flex items-center gap-2">
-            <span className="inline-block w-2 h-2 rounded-full bg-emerald-400" />{" "}
-            Fast delivery
-          </li>
-          <li className="inline-flex items-center gap-2">
-            <span className="inline-block w-2 h-2 rounded-full bg-amber-400" />{" "}
-            Transparent process
-          </li>
-          <li className="inline-flex items-center gap-2">
-            <span className="inline-block w-2 h-2 rounded-full bg-sky-400" />{" "}
-            Ongoing support
-          </li>
-        </ul>
-      </div>
-
-      {/* Right - illustration */}
-      <div
-        className={`md:col-span-5 flex justify-center md:justify-end ${
-          mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
-        } transition-all duration-900`}
-      >
-        <div className="w-full max-w-md relative rounded-2xl overflow-hidden border border-white/10 bg-white/5 p-6 shadow-2xl">
-          <div className="absolute -right-10 -top-10 w-40 h-40 bg-indigo-600/20 rounded-full blur-3xl" />
-          <div className="absolute -left-8 bottom-0 w-32 h-32 bg-violet-500/10 rounded-full blur-2xl" />
-          <svg
-            viewBox="0 0 520 360"
-            className="w-full h-auto"
-            xmlns="http://www.w3.org/2000/svg"
-            role="img"
-            aria-label="Decorative"
-          >
-            <defs>
-              <linearGradient id="g1" x1="0" x2="1" y1="0" y2="1">
-                <stop offset="0%" stopColor="#60a5fa" stopOpacity="0.9" />
-                <stop offset="100%" stopColor="#a78bfa" stopOpacity="0.9" />
-              </linearGradient>
-            </defs>
-            <rect
-              x="0"
-              y="0"
-              width="520"
-              height="360"
-              rx="20"
-              fill="url(#g1)"
-              opacity="0.08"
-            />
-            <g
-              transform="translate(30,40)"
-              fill="none"
-              stroke="#fff"
-              strokeWidth="2"
-              opacity="0.85"
-            >
-              <path d="M30 200 Q120 140 210 200 T390 200" />
-              <circle cx="90" cy="150" r="8" fill="#fff" />
-              <circle cx="210" cy="120" r="8" fill="#fff" />
-              <circle cx="330" cy="170" r="8" fill="#fff" />
-            </g>
-          </svg>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-
-{/* Services Section */}
-<section className="py-12 md:py-16 bg-slate-50">
-  <div className="max-w-7xl mx-auto px-6">
-    <div className="flex items-center justify-between mb-6">
-      <div>
-        <h3 className="text-sm text-indigo-600 font-semibold">What we do</h3>
-        <h2 className="mt-2 text-2xl md:text-3xl font-manrope font-bold text-slate-900">
-          Our Services
-        </h2>
-        <p className="mt-2 text-slate-600 max-w-xl">
-          Engineering, design and data solutions to help businesses grow.
-        </p>
-      </div>
-
-      <div className="ml-auto">
-        <Link
-          to="/service"
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-md border border-slate-200 text-sm text-slate-700 hover:bg-slate-50 transition"
-        >
-          See all services <FaArrowRight className="w-4 h-4" />
-        </Link>
-      </div>
-    </div>
-
-  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-  {services.map((s, i) => (
-    <ServiceCard
-      key={s.id}
-      id={s.id}
-      title={s.title}
-      desc={s.desc}
-      icon={s.icon}
-      from={s.from}
-      to={s.to}
-      delay={i * 60}
-    />
-  ))}
-</div>
-  </div>
-</section>
-
-
+      <Hero mounted={mounted}/>
+      {/* Services Section */}
+      <ServicesSection />
       {/* PROJECTS */}
-      <section className="py-12 md:py-16 bg-slate-50">
+      <section className="py-12 md:py-16 bg-gradient-to-br from-slate-50 to-indigo-50/30">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex items-center justify-between">
             <div>
-              <h3 className="text-sm text-indigo-600 font-semibold">Selected work</h3>
-              <h2 className="mt-2 text-2xl md:text-3xl font-manrope font-bold text-slate-900">Projects that shipped</h2>
+              <h3 className="text-sm text-indigo-600 font-semibold tracking-wider uppercase">Selected work</h3>
+              <h2 className="mt-2 text-2xl md:text-3xl font-bold text-slate-900 bg-gradient-to-r from-indigo-900 to-slate-900 bg-clip-text text-transparent">
+                Projects that shipped
+              </h2>
             </div>
-            <Link to="/portfolio" className="text-sm text-indigo-600 hover:underline">See all projects</Link>
+            <Link
+              to="/portfolio"
+              className="inline-flex items-center text-sm font-medium text-indigo-600 hover:text-indigo-700 group transition-all"
+            >
+              See all projects
+              <svg xmlns="http://www.w3.org/2000/svg" className="ml-1 h-4 w-4 transform group-hover:translate-x-1 transition-transform" viewBox="0 0 20 20" fill="currentColor">
+                <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
+              </svg>
+            </Link>
           </div>
 
-          <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {projects.map((p, i) => (
-              <article key={p.id} className="relative group overflow-hidden rounded-xl border bg-white shadow-sm hover:shadow-lg transition" style={{ transitionDelay: `${i * 80}ms` }}>
-                <div className="h-44 bg-gradient-to-br from-slate-100 to-white flex items-center justify-center text-slate-400">
-                  {/* Replace with image if available */}
-                  <span className="text-sm">Project screenshot</span>
-                </div>
+          <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {projects.map((p, i) => {
+              // Generate a unique gradient for each card based on index
+              const gradients = [
+                'from-indigo-500/10 to-purple-500/10',
+                'from-blue-500/10 to-cyan-500/10',
+                'from-emerald-500/10 to-teal-500/10',
+                'from-amber-500/10 to-orange-500/10',
+                'from-rose-500/10 to-pink-500/10',
+                'from-violet-500/10 to-fuchsia-500/10'
+              ];
 
-                <div className="p-4">
-                  <h4 className="text-lg font-semibold text-slate-900">{p.title}</h4>
-                  <p className="mt-2 text-sm text-slate-600">{p.summary}</p>
+              const gradient = gradients[i % gradients.length];
 
-                  <div className="mt-3 flex flex-wrap gap-2">
-                    {p.tags.map((t) => (
-                      <span key={t} className="text-xs px-2 py-1 bg-indigo-50 rounded-full text-indigo-700 border border-indigo-100">{t}</span>
-                    ))}
+              return (
+                <article
+                  key={p.id}
+                  className="relative group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm hover:shadow-xl transition-all duration-500 hover:-translate-y-1"
+                  style={{ transitionDelay: `${i * 80}ms` }}
+                >
+                  {/* Gradient accent bar */}
+                  <div className={`h-2 w-full bg-gradient-to-r ${gradient}`}></div>
+
+                  <div className="h-44 relative overflow-hidden">
+                    {/* Project image placeholder with gradient overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-slate-100 to-white flex items-center justify-center">
+                    <img src="image.png" alt="" />
+                    </div>
+
+                    {/* Hover overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-indigo-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end">
+                      <div className="p-4 text-white transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                        <span className="text-xs font-medium px-2 py-1 bg-white/20 backdrop-blur-sm rounded-full">View case study</span>
+                      </div>
+                    </div>
                   </div>
-                </div>
 
-                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/6 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-              </article>
-            ))}
+                  <div className="p-5">
+                    <h4 className="text-lg font-bold text-slate-900 group-hover:text-indigo-700 transition-colors">{p.title}</h4>
+                    <p className="mt-2 text-sm text-slate-600">{p.summary}</p>
+
+                    <div className="mt-4 flex flex-wrap gap-2">
+                      {p.tags.map((t, tagIndex) => {
+                        const tagColors = [
+                          'bg-indigo-100 text-indigo-800 border-indigo-200',
+                          'bg-purple-100 text-purple-800 border-purple-200',
+                          'bg-cyan-100 text-cyan-800 border-cyan-200',
+                          'bg-emerald-100 text-emerald-800 border-emerald-200',
+                          'bg-amber-100 text-amber-800 border-amber-200'
+                        ];
+
+                        return (
+                          <span
+                            key={t}
+                            className={`text-xs font-medium px-2.5 py-1 rounded-full border ${tagColors[tagIndex % tagColors.length]}`}
+                          >
+                            {t}
+                          </span>
+                        );
+                      })}
+                    </div>
+
+                    {/* View project button that appears on hover */}
+                    <div className="mt-4 opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-300">
+                      <Link
+                        to={`/portfolio/${p.id}`}
+                        className="inline-flex items-center text-xs font-medium text-indigo-600 hover:text-indigo-700"
+                      >
+                        View project
+                        <svg xmlns="http://www.w3.org/2000/svg" className="ml-1 h-3 w-3" viewBox="0 0 20 20" fill="currentColor">
+                          <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
+                        </svg>
+                      </Link>
+                    </div>
+                  </div>
+
+                  {/* Subtle glow effect on hover */}
+                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-indigo-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                </article>
+              );
+            })}
           </div>
         </div>
       </section>
