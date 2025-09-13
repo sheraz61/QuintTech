@@ -28,6 +28,7 @@ import {
   FaPhone,
   FaEnvelope
 } from "react-icons/fa";
+import Testimonials from "../components/Testimonials";
 
 export default function About() {
   const [mounted, setMounted] = useState(false);
@@ -155,109 +156,219 @@ export default function About() {
       ]
     }
   ];
-
-  const companyStats = [
-    { number: "2021", label: "Founded", icon: "🚀" },
-    { number: "50+", label: "Projects Completed", icon: "💼" },
-    { number: "25+", label: "Happy Clients", icon: "😊" },
-    { number: "4.9", label: "Client Rating", icon: "⭐" }
-  ];
-
-  const timeline = [
-    {
-      year: "2021",
-      title: "Company Founded",
-      desc: "Alex and Sarah joined forces to create Quint Tech with a mission to build better software.",
-      milestone: "🚀"
-    },
-    {
-      year: "2022",
-      title: "First Major Client",
-      desc: "Landed our first enterprise client and delivered a complete e-commerce platform.",
-      milestone: "🎯"
-    },
-    {
-      year: "2023",
-      title: "Team Expansion",
-      desc: "Grew to a team of 8 specialists covering all aspects of modern software development.",
-      milestone: "👥"
-    },
-    {
-      year: "2024",
-      title: "Industry Recognition",
-      desc: "Awarded 'Best Development Agency' by TechReview and featured in major publications.",
-      milestone: "🏆"
-    }
-  ];
-
-  const clientTestimonials = [
-    {
-      name: "David Wilson",
-      company: "ShopEasy Retail",
-      role: "CEO",
-      text: "Quint Tech transformed our business with their e-commerce platform. Sales increased by 300% in the first quarter.",
-      rating: 5,
-      image: "/api/placeholder/80/80"
-    },
-    {
-      name: "Lisa Park",
-      company: "HealthTech Solutions",
-      role: "CTO",
-      text: "Their expertise in cloud architecture saved us thousands in infrastructure costs while improving performance.",
-      rating: 5,
-      image: "/api/placeholder/80/80"
-    },
-    {
-      name: "Robert Kim",
-      company: "StartupLab",
-      role: "Founder",
-      text: "From MVP to scale, Quint Tech has been our trusted technology partner every step of the way.",
-      rating: 5,
-      image: "/api/placeholder/80/80"
-    }
-  ];
-
-  const certifications = [
-    "AWS Solutions Architect",
-    "Google Cloud Professional",
-    "Certified Kubernetes Administrator",
-    "Microsoft Azure Expert",
-    "Salesforce Certified",
-    "MongoDB Professional"
-  ];
-
   return (
     <main className="relative">
       {/* HERO SECTION */}
-      <section className="pt-24 pb-12 md:pt-32 md:pb-16 bg-gradient-to-br from-slate-50 via-indigo-50/30 to-violet-50/20">
-        <div className="max-w-7xl mx-auto px-6">
+      <section className="relative pt-28 pb-16 md:pt-32 md:pb-20 bg-gradient-to-br from-slate-50 via-indigo-50/30 to-violet-50/20 overflow-hidden">
+        {/* Background Elements */}
+        <div className="absolute inset-0 overflow-hidden">
+          {/* Floating Orbs */}
+          <div className="absolute top-20 left-10 w-32 h-32 bg-gradient-to-r from-indigo-400/20 to-violet-400/20 rounded-full blur-xl animate-pulse"></div>
+          <div className="absolute top-40 right-20 w-24 h-24 bg-gradient-to-r from-blue-400/20 to-cyan-400/20 rounded-full blur-lg animate-pulse" style={{ animationDelay: '1s' }}></div>
+          <div className="absolute bottom-20 left-1/4 w-20 h-20 bg-gradient-to-r from-purple-400/20 to-pink-400/20 rounded-full blur-md animate-pulse" style={{ animationDelay: '2s' }}></div>
+          
+          {/* Grid Pattern */}
+          <div className="absolute inset-0 opacity-40" style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='1'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
+          }}></div>
+        </div>
+
+        <div className="relative max-w-7xl mx-auto px-6">
           <div className={`text-center transition-all duration-1000 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-            <h3 className="text-sm text-indigo-600 font-semibold tracking-wider uppercase">About Quint Tech</h3>
-            <h1 className="mt-2 text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 bg-gradient-to-r from-indigo-900 to-slate-900 bg-clip-text text-transparent">
-              Building the Future, One Project at a Time
+            {/* Badge */}
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/80 backdrop-blur-sm border border-indigo-200 rounded-full text-indigo-600 font-semibold text-sm tracking-wider uppercase shadow-sm mb-6 ">
+              <div className="w-2 h-2 bg-indigo-500 rounded-full animate-pulse"></div>
+              About Quint Tech
+            </div>
+
+            {/* Main Heading */}
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 bg-gradient-to-r from-indigo-900 via-violet-900 to-slate-900 bg-clip-text text-transparent leading-tight mb-6">
+              Building the Future,
+              <br />
+              <span className="bg-gradient-to-r from-indigo-600 to-violet-600 bg-clip-text text-transparent">
+                One Project at a Time
+              </span>
             </h1>
-            <p className="mt-4 text-lg text-slate-600 max-w-3xl mx-auto">
+
+            {/* Description */}
+            <p className="text-xl text-slate-600 max-w-4xl mx-auto leading-relaxed mb-8">
               We're a passionate team of engineers, designers, and strategists who believe that great technology
               should solve real problems and create meaningful impact for businesses and users alike.
             </p>
+
+            {/* Stats Row */}
+            <div className="flex flex-wrap justify-center gap-8 md:gap-12 mb-12">
+              <div className="text-center">
+                <div className="text-3xl md:text-4xl font-bold text-indigo-600 mb-1">12+</div>
+                <div className="text-sm text-slate-600 font-medium">Projects Delivered</div>
+              </div>
+              <div className="text-center">
+                <div className="text-3xl md:text-4xl font-bold text-violet-600 mb-1">5+</div>
+                <div className="text-sm text-slate-600 font-medium">Happy Clients</div>
+              </div>
+              <div className="text-center">
+                <div className="text-3xl md:text-4xl font-bold text-blue-600 mb-1">4.9</div>
+                <div className="text-sm text-slate-600 font-medium">Client Rating</div>
+              </div>
+              <div className="text-center">
+                <div className="text-3xl md:text-4xl font-bold text-emerald-600 mb-1">2024</div>
+                <div className="text-sm text-slate-600 font-medium">Founded</div>
+              </div>
+            </div>
+
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link
+                to="/portfolio"
+                className="group inline-flex items-center gap-2 px-8 py-4 bg-indigo-600 text-white font-semibold rounded-xl hover:bg-indigo-700 hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
+              >
+                View Our Work
+                <FaArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
+              </Link>
+              <Link
+                to="/contact"
+                className="inline-flex items-center gap-2 px-8 py-4 border-2 border-slate-300 text-slate-700 font-semibold rounded-xl hover:bg-slate-50 hover:border-indigo-300 hover:text-indigo-700 transition-all duration-300 shadow-sm hover:shadow-lg"
+              >
+                Start a Project
+                <FaRocket className="w-4 h-4" />
+              </Link>
+            </div>
           </div>
 
-          {/* Company Stats */}
-          <div className={`mt-12 grid grid-cols-2 md:grid-cols-4 gap-6 transition-all duration-1000 delay-200 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-            {companyStats.map((stat, index) => (
-              <div
-                key={index}
-                className="group text-center p-6 bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-xl transition-all duration-500 hover:-translate-y-2"
-                style={{ transitionDelay: `${index * 100}ms` }}
-              >
-                <div className="text-3xl mb-2">{stat.icon}</div>
-                <div className="text-2xl md:text-3xl font-bold text-indigo-600 mb-1">{stat.number}</div>
-                <div className="text-sm text-slate-600">{stat.label}</div>
-              </div>
-            ))}
+          {/* Floating Tech Icons */}
+          <div className="absolute top-1/2 left-8 transform -translate-y-1/2 hidden lg:block">
+            <div className="space-y-4">
+              {[
+                { icon: <FaCode className="w-6 h-6" />, color: "from-blue-500 to-cyan-500", delay: "0s" },
+                { icon: <FaPaintBrush className="w-6 h-6" />, color: "from-emerald-500 to-teal-500", delay: "0.5s" },
+                { icon: <FaDatabase className="w-6 h-6" />, color: "from-amber-500 to-orange-500", delay: "1s" },
+                { icon: <FaCloud className="w-6 h-6" />, color: "from-violet-500 to-purple-500", delay: "1.5s" }
+              ].map((item, index) => (
+                <div
+                  key={index}
+                  className={`w-12 h-12 bg-gradient-to-r ${item.color} rounded-xl flex items-center justify-center text-white shadow-lg hover:scale-110 transition-all duration-300 animate-pulse`}
+                  style={{ animationDelay: item.delay }}
+                >
+                  {item.icon}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="absolute top-1/2 right-8 transform -translate-y-1/2 hidden lg:block">
+            <div className="space-y-4">
+              {[
+                { icon: <FaRocket className="w-6 h-6" />, color: "from-rose-500 to-pink-500", delay: "0.2s" },
+                { icon: <FaShieldAlt className="w-6 h-6" />, color: "from-indigo-500 to-blue-500", delay: "0.7s" },
+                { icon: <FaUsers className="w-6 h-6" />, color: "from-green-500 to-emerald-500", delay: "1.2s" },
+                { icon: <FaHeart className="w-6 h-6" />, color: "from-red-500 to-rose-500", delay: "1.7s" }
+              ].map((item, index) => (
+                <div
+                  key={index}
+                  className={`w-12 h-12 bg-gradient-to-r ${item.color} rounded-xl flex items-center justify-center text-white shadow-lg hover:scale-110 transition-all duration-300 animate-pulse`}
+                  style={{ animationDelay: item.delay }}
+                >
+                  {item.icon}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
+
+      {/* TEAM SECTION */}
+      <section className="py-12 md:py-16">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-12">
+            <h3 className="text-sm  text-indigo-600 font-semibold tracking-wider uppercase">Our Team</h3>
+            <h2 className="mt-2 text-2xl md:text-3xl font-bold text-slate-900 bg-gradient-to-r from-indigo-900 to-slate-900 bg-clip-text text-transparent">
+              Meet the People Behind the Code
+            </h2>
+            <p className="mt-4 text-slate-600 max-w-2xl mx-auto">
+              We're a diverse team of experts who share a passion for creating exceptional software solutions.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {teamMembers.map((member, index) => (
+              <div
+                key={member.id}
+                className="group bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 overflow-hidden"
+                style={{ transitionDelay: `${index * 100}ms` }}
+              >
+                {/* Profile Image */}
+                <div className="relative h-64 overflow-hidden">
+                  <img
+                    src={member.image}
+                    alt={member.name}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+
+                  {/* Overlay with Social Links */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                    <div className="absolute bottom-4 left-4 right-4 flex justify-center gap-3">
+                      {Object.entries(member.social).map(([platform, url]) => (
+                        <a
+                          key={platform}
+                          href={url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="p-2 rounded-lg bg-white/20 backdrop-blur-sm text-white hover:bg-white/30 transition-colors"
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          {platform === 'linkedin' && <FaLinkedin className="w-4 h-4" />}
+                          {platform === 'github' && <FaGithub className="w-4 h-4" />}
+                          {platform === 'twitter' && <FaTwitter className="w-4 h-4" />}
+                        </a>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Member Info */}
+                <div className="p-6">
+                  <h4 className="text-lg font-bold text-slate-900 mb-1">{member.name}</h4>
+                  <p className="text-indigo-600 font-medium text-sm mb-1">{member.role}</p>
+                  <p className="text-slate-500 text-xs mb-4">{member.specialty}</p>
+
+                  <p className="text-sm text-slate-600 leading-relaxed mb-4 line-clamp-3">
+                    {member.bio}
+                  </p>
+
+                  {/* Skills */}
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    {member.skills.slice(0, 3).map((skill, skillIndex) => (
+                      <span
+                        key={skillIndex}
+                        className="px-2 py-1 text-xs font-medium bg-slate-100 text-slate-700 rounded-md"
+                      >
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
+
+                  {/* Key Achievement */}
+                  <div className="flex items-start gap-2">
+                    <FaAward className="w-4 h-4 text-amber-500 flex-shrink-0 mt-0.5" />
+                    <p className="text-xs text-slate-600 leading-relaxed">
+                      {member.achievements[0]}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Team CTA */}
+          <div className="mt-12 text-center">
+            <div className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-indigo-50 to-violet-50 rounded-full border border-indigo-100">
+              <FaUsers className="w-5 h-5 text-indigo-600" />
+              <span className="text-slate-700 font-medium">We're always looking for talented people to join our team</span>
+            </div>
+          </div>
+        </div>
+      </section>
+      {/* HERO SECTION */}
 
       {/* OUR STORY SECTION */}
       <section className="py-12 md:py-16">
@@ -356,18 +467,21 @@ export default function About() {
             {companyValues.map((value, index) => (
               <div
                 key={index}
-                className={`group relative p-6 bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 cursor-pointer ${
-                  activeValue === index ? 'ring-2 ring-indigo-500 shadow-lg' : ''
+                className={`group relative overflow-hidden p-6 bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-xl transition-all duration-500 hover:-translate-y-1 cursor-pointer ${
+                  activeValue === index ? 'ring-2 ring-indigo-500/50 shadow-lg' : ''
                 }`}
                 onClick={() => setActiveValue(index)}
-                style={{ transitionDelay: `${index * 150}ms` }}
+                style={{ transitionDelay: `${index * 100}ms` }}
               >
-                {/* Background Gradient */}
+                {/* Background Gradient Overlay */}
                 <div className={`absolute inset-0 bg-gradient-to-br ${value.bgColor} opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl`} />
+
+                {/* Animated Border Glow */}
+                <div className={`absolute inset-0 rounded-2xl bg-gradient-to-r ${value.color} opacity-0 group-hover:opacity-20 blur-sm transition-all duration-500 scale-105`} />
 
                 {/* Content */}
                 <div className="relative z-10">
-                  <div className={`w-14 h-14 rounded-xl bg-gradient-to-r ${value.color} flex items-center justify-center text-white mb-4 transform transition-all duration-500 group-hover:scale-110 group-hover:rotate-3 shadow-lg`}>
+                  <div className={`w-14 h-14 rounded-xl bg-gradient-to-r ${value.color} flex items-center justify-center text-white mb-4 transform transition-all duration-500 group-hover:scale-110 group-hover:rotate-6 shadow-lg`}>
                     {value.icon}
                   </div>
 
@@ -380,235 +494,17 @@ export default function About() {
                   </p>
                 </div>
 
-                {/* Active Indicator */}
-                {activeValue === index && (
-                  <div className={`absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r ${value.color} rounded-b-2xl overflow-hidden`} />
-                 )}
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* TEAM SECTION */}
-      <section className="py-12 md:py-16">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-12">
-            <h3 className="text-sm text-indigo-600 font-semibold tracking-wider uppercase">Our Team</h3>
-            <h2 className="mt-2 text-2xl md:text-3xl font-bold text-slate-900 bg-gradient-to-r from-indigo-900 to-slate-900 bg-clip-text text-transparent">
-              Meet the People Behind the Code
-            </h2>
-            <p className="mt-4 text-slate-600 max-w-2xl mx-auto">
-              We're a diverse team of experts who share a passion for creating exceptional software solutions.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {teamMembers.map((member, index) => (
-              <div
-                key={member.id}
-                className="group bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 overflow-hidden"
-                style={{ transitionDelay: `${index * 100}ms` }}
-              >
-                {/* Profile Image */}
-                <div className="relative h-64 overflow-hidden">
-                  <img
-                    src={member.image}
-                    alt={member.name}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                  />
-
-                  {/* Overlay with Social Links */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                    <div className="absolute bottom-4 left-4 right-4 flex justify-center gap-3">
-                      {Object.entries(member.social).map(([platform, url]) => (
-                        <a
-                          key={platform}
-                          href={url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="p-2 rounded-lg bg-white/20 backdrop-blur-sm text-white hover:bg-white/30 transition-colors"
-                          onClick={(e) => e.stopPropagation()}
-                        >
-                          {platform === 'linkedin' && <FaLinkedin className="w-4 h-4" />}
-                          {platform === 'github' && <FaGithub className="w-4 h-4" />}
-                          {platform === 'twitter' && <FaTwitter className="w-4 h-4" />}
-                        </a>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-
-                {/* Member Info */}
-                <div className="p-6">
-                  <h4 className="text-lg font-bold text-slate-900 mb-1">{member.name}</h4>
-                  <p className="text-indigo-600 font-medium text-sm mb-1">{member.role}</p>
-                  <p className="text-slate-500 text-xs mb-4">{member.specialty}</p>
-
-                  <p className="text-sm text-slate-600 leading-relaxed mb-4 line-clamp-3">
-                    {member.bio}
-                  </p>
-
-                  {/* Skills */}
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {member.skills.slice(0, 3).map((skill, skillIndex) => (
-                      <span
-                        key={skillIndex}
-                        className="px-2 py-1 text-xs font-medium bg-slate-100 text-slate-700 rounded-md"
-                      >
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
-
-                  {/* Key Achievement */}
-                  <div className="flex items-start gap-2">
-                    <FaAward className="w-4 h-4 text-amber-500 flex-shrink-0 mt-0.5" />
-                    <p className="text-xs text-slate-600 leading-relaxed">
-                      {member.achievements[0]}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Team CTA */}
-          <div className="mt-12 text-center">
-            <div className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-indigo-50 to-violet-50 rounded-full border border-indigo-100">
-              <FaUsers className="w-5 h-5 text-indigo-600" />
-              <span className="text-slate-700 font-medium">We're always looking for talented people to join our team</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* TIMELINE SECTION */}
-      <section className="py-12 md:py-16 bg-gradient-to-br from-slate-50 to-indigo-50/30">
-        <div className="max-w-4xl mx-auto px-6">
-          <div className="text-center mb-12">
-            <h3 className="text-sm text-indigo-600 font-semibold tracking-wider uppercase">Our Journey</h3>
-            <h2 className="mt-2 text-2xl md:text-3xl font-bold text-slate-900 bg-gradient-to-r from-indigo-900 to-slate-900 bg-clip-text text-transparent">
-              Milestones That Shaped Us
-            </h2>
-          </div>
-
-          <div className="relative">
-            {/* Timeline Line */}
-            <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-indigo-500 to-violet-500 hidden md:block" />
-
-            <div className="space-y-8">
-              {timeline.map((event, index) => (
-                <div
-                  key={index}
-                  className="relative flex items-center gap-6"
-                  style={{ transitionDelay: `${index * 200}ms` }}
-                >
-                  {/* Timeline Dot */}
-                  <div className="hidden md:flex w-16 h-16 rounded-full bg-gradient-to-r from-indigo-500 to-violet-500 flex items-center justify-center text-white text-xl shadow-lg relative z-10">
-                    {event.milestone}
-                  </div>
-
-                  {/* Content Card */}
-                  <div className="flex-1 bg-white rounded-2xl border border-slate-200 p-6 shadow-sm hover:shadow-lg transition-all duration-300">
-                    <div className="flex items-center gap-3 mb-3">
-                      <div className="md:hidden w-12 h-12 rounded-full bg-gradient-to-r from-indigo-500 to-violet-500 flex items-center justify-center text-white">
-                        {event.milestone}
-                      </div>
-                      <div>
-                        <div className="text-sm font-semibold text-indigo-600">{event.year}</div>
-                        <h4 className="text-lg font-bold text-slate-900">{event.title}</h4>
-                      </div>
-                    </div>
-                    <p className="text-slate-600 leading-relaxed">{event.desc}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* TESTIMONIALS SECTION */}
-      <section className="py-12 md:py-16">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-12">
-            <h3 className="text-sm text-indigo-600 font-semibold tracking-wider uppercase">Client Testimonials</h3>
-            <h2 className="mt-2 text-2xl md:text-3xl font-bold text-slate-900 bg-gradient-to-r from-indigo-900 to-slate-900 bg-clip-text text-transparent">
-              What Our Clients Say
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {clientTestimonials.map((testimonial, index) => (
-              <div
-                key={index}
-                className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm hover:shadow-lg transition-all duration-300"
-                style={{ transitionDelay: `${index * 150}ms` }}
-              >
-                {/* Rating */}
-                <div className="flex items-center gap-1 mb-4">
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <FaStar key={i} className="w-4 h-4 text-amber-400" />
-                  ))}
-                </div>
-
-                {/* Quote */}
-                <div className="mb-4">
-                  <FaQuoteLeft className="w-5 h-5 text-indigo-400 mb-2" />
-                  <p className="text-slate-700 leading-relaxed">{testimonial.text}</p>
-                </div>
-
-                {/* Author */}
-                <div className="flex items-center gap-3">
-                  <img
-                    src={testimonial.image}
-                    alt={testimonial.name}
-                    className="w-12 h-12 rounded-full object-cover"
-                  />
-                  <div>
-                    <p className="font-semibold text-slate-900">{testimonial.name}</p>
-                    <p className="text-sm text-slate-600">{testimonial.role}, {testimonial.company}</p>
-                  </div>
+                {/* Pulse Animation for Active Values */}
+                <div className={`absolute top-3 right-3 w-2 h-2 bg-gradient-to-r ${value.color} rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 ${
+                  activeValue === index ? 'opacity-100' : ''
+                }`}>
+                  <div className={`absolute inset-0 bg-gradient-to-r ${value.color} rounded-full animate-ping`} />
                 </div>
               </div>
             ))}
           </div>
         </div>
       </section>
-
-      {/* CERTIFICATIONS & ACHIEVEMENTS */}
-      <section className="py-12 md:py-16 bg-gradient-to-br from-slate-50 to-indigo-50/30">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-12">
-            <h3 className="text-sm text-indigo-600 font-semibold tracking-wider uppercase">Certifications & Achievements</h3>
-            <h2 className="mt-2 text-2xl md:text-3xl font-bold text-slate-900 bg-gradient-to-r from-indigo-900 to-slate-900 bg-clip-text text-transparent">
-              Recognized Expertise
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {certifications.map((cert, index) => (
-              <div
-                key={index}
-                className="flex items-center gap-3 bg-white rounded-lg border border-slate-200 p-4 hover:shadow-md transition-all duration-300"
-              >
-                <div className="w-10 h-10 rounded-lg bg-gradient-to-r from-emerald-500 to-teal-500 flex items-center justify-center text-white">
-                  <FaCheckCircle className="w-5 h-5" />
-                </div>
-                <span className="font-medium text-slate-900">{cert}</span>
-              </div>
-            ))}
-          </div>
-
-          <div className="mt-8 text-center">
-            <p className="text-slate-600 text-sm">
-              Our team holds industry-leading certifications and continues to stay updated with the latest technologies.
-            </p>
-          </div>
-        </div>
-      </section>
-
-</main>
-);
+    </main>
+  );
 }

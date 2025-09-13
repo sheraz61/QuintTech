@@ -55,7 +55,7 @@ const StatsSection = ({ mounted }) => {
 
   const stats = [
     {
-      number: 50,
+      number: 10,
       suffix: "+",
       label: "Projects Delivered",
       icon: "🚀",
@@ -65,7 +65,7 @@ const StatsSection = ({ mounted }) => {
       description: "Successfully completed"
     },
     {
-      number: 2,
+      number: 4,
       suffix: "hrs",
       label: "Average Response",
       icon: "⚡",
@@ -103,7 +103,7 @@ const StatsSection = ({ mounted }) => {
         mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
       }`}
     >
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-6 md:gap-8">
         {stats.map((stat, index) => (
           <div
             key={index}

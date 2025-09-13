@@ -37,10 +37,7 @@ export default function Contact() {
     company: "",
     phone: "",
     service: "",
-    budget: "",
-    timeline: "",
     message: "",
-    projectType: "new"
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
@@ -73,12 +70,23 @@ export default function Contact() {
         company: "",
         phone: "",
         service: "",
-        budget: "",
-        timeline: "",
         message: "",
-        projectType: "new"
       });
     }, 2000);
+  };
+
+  const scrollToForm = () => {
+    const formElement = document.getElementById('contact-form');
+    if (formElement) {
+      const offset = 100; // Offset to account for fixed header
+      const elementPosition = formElement.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
   };
 
   const services = [
@@ -91,30 +99,13 @@ export default function Contact() {
     { value: "consultation", label: "Technical Consultation", icon: <FaLightbulb className="w-4 h-4" /> },
     { value: "other", label: "Other", icon: <FaHandshake className="w-4 h-4" /> }
   ];
-
-  const budgetRanges = [
-    { value: "5k-15k", label: "$5K - $15K" },
-    { value: "15k-30k", label: "$15K - $30K" },
-    { value: "30k-50k", label: "$30K - $50K" },
-    { value: "50k+", label: "$50K+" },
-    { value: "discuss", label: "Let's discuss" }
-  ];
-
-  const timelines = [
-    { value: "urgent", label: "ASAP (Rush project)" },
-    { value: "1-2months", label: "1-2 months" },
-    { value: "3-4months", label: "3-4 months" },
-    { value: "6months+", label: "6+ months" },
-    { value: "flexible", label: "Flexible timeline" }
-  ];
-
   const contactInfo = [
     {
       icon: <FaEnvelope className="w-5 h-5" />,
       title: "Email Us",
-      detail: "hello@quinttech.com",
+      detail: "quinttechco@gmail.com",
       subDetail: "We reply within 2 hours",
-      href: "mailto:hello@quinttech.com",
+      href: "mailto:quinttechco@gmail.com",
       color: "from-blue-500 to-cyan-500"
     },
     {
@@ -167,13 +158,36 @@ export default function Contact() {
     }
   ];
 
+  const faqData = [
+    {
+      question: "How long does it take to complete a project?",
+      answer: "Project timelines vary depending on complexity. Simple websites take 4-6 weeks, while complex web applications can take 3-6 months. We provide detailed timelines during our initial consultation.",
+      icon: "⏱️"
+    },
+    {
+      question: "Do you provide ongoing support after project completion?",
+      answer: "Yes! We offer comprehensive maintenance packages including bug fixes, security updates, performance monitoring, and feature enhancements. Our support plans start at $500/month.",
+      icon: "🛠️"
+    },
+    {
+      question: "What technologies do you specialize in?",
+      answer: "We specialize in modern web technologies including React, Next.js, Node.js, Python, AWS, and mobile development with React Native. We choose technologies based on your specific project requirements.",
+      icon: "💻"
+    },
+    {
+      question: "What's included in your project estimates?",
+      answer: "Our estimates include project planning, design, development, testing, deployment, documentation, and post-launch support. We provide detailed breakdowns so you know exactly what you're paying for.",
+      icon: "💰"
+    }
+  ];
+
   return (
     <main className="relative">
       {/* HERO SECTION */}
       <section className="pt-24 pb-12 md:pt-32 md:pb-16 bg-gradient-to-br from-slate-50 via-indigo-50/30 to-violet-50/20">
         <div className="max-w-7xl mx-auto px-6">
           <div className={`text-center transition-all duration-1000 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-            <h3 className="text-sm text-indigo-600 font-semibold tracking-wider uppercase">Get In Touch</h3>
+            <h3 className="text-sm text-indigo-600 font-semibold tracking-wider uppercase pt-12">Get In Touch</h3>
             <h1 className="mt-2 text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 bg-gradient-to-r from-indigo-900 to-slate-900 bg-clip-text text-transparent">
               Let's Build Something Amazing Together
             </h1>
@@ -197,8 +211,8 @@ export default function Contact() {
             <div className="lg:col-span-2">
               <div className="bg-white rounded-2xl border border-slate-200 shadow-lg p-8">
                 <div className="mb-8">
-                  <h2 className="text-2xl font-bold text-slate-900 mb-2">Tell Us About Your Project</h2>
-                  <p className="text-slate-600">Fill out the form below and we'll get back to you with a detailed proposal.</p>
+                  <h2 className="text-2xl font-bold text-slate-900 mb-2">Send us a message</h2>
+                  <p className="text-slate-600">We'd love to hear from you. Tell us about your project.</p>
                 </div>
 
                 {submitSuccess && (
@@ -211,36 +225,7 @@ export default function Contact() {
                   </div>
                 )}
 
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  {/* Project Type Toggle */}
-                  <div>
-                    <label className="block text-sm font-medium text-slate-700 mb-3">Project Type</label>
-                    <div className="flex gap-4">
-                      {[
-                        { value: "new", label: "New Project" },
-                        { value: "existing", label: "Existing Project" },
-                        { value: "consultation", label: "Consultation" }
-                      ].map((type) => (
-                        <label key={type.value} className="flex items-center cursor-pointer">
-                          <input
-                            type="radio"
-                            name="projectType"
-                            value={type.value}
-                            checked={formData.projectType === type.value}
-                            onChange={handleInputChange}
-                            className="sr-only"
-                          />
-                          <div className={`px-4 py-2 rounded-lg border-2 transition-all ${
-                            formData.projectType === type.value
-                              ? 'border-indigo-500 bg-indigo-50 text-indigo-700'
-                              : 'border-slate-200 text-slate-700 hover:border-slate-300'
-                          }`}>
-                            {type.label}
-                          </div>
-                        </label>
-                      ))}
-                    </div>
-                  </div>
+                <form onSubmit={handleSubmit} className="space-y-6" id="contact-form">
 
                   {/* Personal Info Row */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -330,48 +315,6 @@ export default function Contact() {
                     </select>
                   </div>
 
-                  {/* Budget & Timeline Row */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                      <label htmlFor="budget" className="block text-sm font-medium text-slate-700 mb-2">
-                        Project Budget
-                      </label>
-                      <select
-                        id="budget"
-                        name="budget"
-                        value={formData.budget}
-                        onChange={handleInputChange}
-                        className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors"
-                      >
-                        <option value="">Select budget range...</option>
-                        {budgetRanges.map((budget) => (
-                          <option key={budget.value} value={budget.value}>
-                            {budget.label}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-                    <div>
-                      <label htmlFor="timeline" className="block text-sm font-medium text-slate-700 mb-2">
-                        Timeline
-                      </label>
-                      <select
-                        id="timeline"
-                        name="timeline"
-                        value={formData.timeline}
-                        onChange={handleInputChange}
-                        className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors"
-                      >
-                        <option value="">Select timeline...</option>
-                        {timelines.map((timeline) => (
-                          <option key={timeline.value} value={timeline.value}>
-                            {timeline.label}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-                  </div>
-
                   {/* Message */}
                   <div>
                     <label htmlFor="message" className="block text-sm font-medium text-slate-700 mb-2">
@@ -385,7 +328,7 @@ export default function Contact() {
                       required
                       rows="5"
                       className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors resize-y"
-                      placeholder="Please describe your project requirements, goals, and any specific features you need..."
+                      placeholder="Tell us about your project..."
                     />
                   </div>
 
@@ -423,44 +366,84 @@ export default function Contact() {
                   {contactInfo.map((contact, index) => (
                     <div
                       key={index}
-                      className="group bg-white rounded-xl border border-slate-200 p-6 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+                      className="group relative overflow-hidden bg-white rounded-xl border border-slate-200 shadow-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-2"
                     >
-                      <div className="flex items-start gap-4">
-                        <div className={`flex items-center justify-center w-12 h-12 rounded-lg bg-gradient-to-r ${contact.color} text-white shadow-lg group-hover:scale-110 transition-transform duration-300`}>
-                          {contact.icon}
+                      {/* Gradient Background Overlay */}
+                      <div className={`absolute inset-0 bg-gradient-to-br ${contact.color.replace('from-', 'from-').replace(' to-', '-50 to-').replace('-500', '-50')} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
+
+                      {/* Animated Border Glow */}
+                      <div className={`absolute inset-0 rounded-xl bg-gradient-to-r ${contact.color} opacity-0 group-hover:opacity-20 blur-sm transition-all duration-500 scale-105`} />
+
+                      {/* Content */}
+                      <div className="relative z-10 p-6">
+                        <div className="flex items-start gap-4">
+                          <div className={`flex items-center justify-center w-12 h-12 rounded-lg bg-gradient-to-r ${contact.color} text-white shadow-lg transform transition-all duration-500 group-hover:scale-110 group-hover:rotate-6`}>
+                            {contact.icon}
+                          </div>
+                          <div className="flex-1">
+                            <h4 className="font-semibold text-slate-900 group-hover:text-slate-800 transition-colors duration-500">
+                              {contact.title}
+                            </h4>
+                            <p className="text-slate-700 group-hover:text-slate-600 transition-colors duration-500 mt-1">{contact.detail}</p>
+                            <p className="text-xs text-slate-500 group-hover:text-slate-600 transition-colors duration-500 mt-1">{contact.subDetail}</p>
+                          </div>
                         </div>
-                        <div className="flex-1">
-                          <h4 className="font-semibold text-slate-900 group-hover:text-indigo-700 transition-colors duration-300">
-                            {contact.title}
-                          </h4>
-                          <p className="text-slate-700 mt-1">{contact.detail}</p>
-                          <p className="text-xs text-slate-500 mt-1">{contact.subDetail}</p>
+
+                        {/* Pulse Animation for Active Cards */}
+                        <div className={`absolute top-2 right-2 w-2 h-2 bg-gradient-to-r ${contact.color} rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500`}>
+                          <div className={`absolute inset-0 bg-gradient-to-r ${contact.color} rounded-full animate-ping`} />
                         </div>
+
+                        {/* Bottom Accent Line */}
+                        <div className={`absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r ${contact.color} transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left`} />
                       </div>
                     </div>
                   ))}
                 </div>
 
                 {/* Social Links */}
-                <div className="bg-white rounded-xl border border-slate-200 p-6">
-                  <h4 className="font-semibold text-slate-900 mb-4 text-center">Follow Us</h4>
-                  <div className="flex gap-3 items-center justify-center">
-                    {[
-                      { icon: <FaLinkedin className="w-5 h-5" />, href: "#", color: "hover:bg-blue-600" },
-                      { icon: <FaTwitter className="w-5 h-5" />, href: "#", color: "hover:bg-sky-500" },
-                      { icon: <FaGithub className="w-5 h-5" />, href: "#", color: "hover:bg-slate-800" }
-                    ].map((social, index) => (
-                      <a
-                        key={index}
-                        href={social.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={`flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-600 transition-all duration-300 hover:scale-110 hover:text-white ${social.color}`}
-                      >
-                        {social.icon}
-                      </a>
-                    ))}
+                <div className="group relative overflow-hidden bg-white rounded-xl border border-slate-200 shadow-sm hover:shadow-2xl transition-all duration-500 p-6">
+                  {/* Gradient Background Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-slate-50 to-indigo-50 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+                  {/* Animated Border Glow */}
+                  <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-indigo-500 to-violet-500 opacity-0 group-hover:opacity-20 blur-sm transition-all duration-500 scale-105" />
+
+                  {/* Content */}
+                  <div className="relative z-10">
+                    <h4 className="font-semibold text-slate-900 group-hover:text-slate-800 transition-colors duration-500 mb-4 text-center">Follow Us</h4>
+                    <div className="flex gap-3 items-center justify-center">
+                      {[
+                        { icon: <FaLinkedin className="w-5 h-5" />, href: "#", color: "from-blue-500 to-blue-600", bgColor: "from-blue-50 to-blue-100" },
+                        { icon: <FaTwitter className="w-5 h-5" />, href: "#", color: "from-sky-400 to-sky-500", bgColor: "from-sky-50 to-sky-100" },
+                        { icon: <FaGithub className="w-5 h-5" />, href: "#", color: "from-slate-600 to-slate-800", bgColor: "from-slate-50 to-slate-100" }
+                      ].map((social, index) => (
+                        <a
+                          key={index}
+                          href={social.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className={`group/social relative overflow-hidden flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 text-slate-600 transition-all duration-500 hover:scale-110 hover:text-white ${social.color.replace('from-', 'hover:from-').replace(' to-', ' hover:to-')}`}
+                        >
+                          {/* Social Icon Background */}
+                          <div className={`absolute inset-0 bg-gradient-to-r ${social.bgColor} opacity-0 group-hover/social:opacity-100 transition-opacity duration-300`} />
+                          <div className={`absolute inset-0 bg-gradient-to-r ${social.color} opacity-0 group-hover/social:opacity-100 transition-opacity duration-300`} />
+                          {/* Icon */}
+                          <div className="relative z-10 group-hover/social:text-white transition-colors duration-300">
+                            {social.icon}
+                          </div>
+
+                          {/* Pulse Animation */}
+                          <div className={`absolute top-1 right-1 w-1.5 h-1.5 bg-gradient-to-r ${social.color} rounded-full opacity-0 group-hover/social:opacity-100 transition-opacity duration-500`}>
+                            <div className={`absolute inset-0 bg-gradient-to-r ${social.color} rounded-full animate-ping`} />
+                          </div>
+                        </a>
+                      ))}
+                    </div>
                   </div>
+
+                  {/* Bottom Accent Line */}
+                  <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-indigo-500 to-violet-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
                 </div>
               </div>
             </div>
@@ -469,7 +452,7 @@ export default function Contact() {
       </section>
 
       {/* TESTIMONIALS SECTION */}
-      <section className="py-12 md:py-16 bg-gradient-to-br from-slate-50 to-indigo-50/30">
+      {/* <section className="py-12 md:py-16 bg-gradient-to-br from-slate-50 to-indigo-50/30">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-12">
             <h3 className="text-sm text-indigo-600 font-semibold tracking-wider uppercase">Client Testimonials</h3>
@@ -509,87 +492,114 @@ export default function Contact() {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* FAQ SECTION */}
-      <section className="py-12 md:py-16">
+      <section className="py-12 md:py-16 bg-gradient-to-br from-slate-50 via-indigo-50/30 to-violet-50/20">
         <div className="max-w-4xl mx-auto px-6">
           <div className="text-center mb-12">
             <h3 className="text-sm text-indigo-600 font-semibold tracking-wider uppercase">FAQ</h3>
             <h2 className="mt-2 text-2xl md:text-3xl font-bold text-slate-900 bg-gradient-to-r from-indigo-900 to-slate-900 bg-clip-text text-transparent">
               Frequently Asked Questions
             </h2>
+            <p className="mt-4 text-slate-600 max-w-2xl mx-auto">
+              Find answers to the most common questions about our services.
+            </p>
           </div>
 
-          <div className="space-y-4">
-            {[
-              {
-                question: "How long does it take to complete a project?",
-                answer: "Project timelines vary depending on complexity. Simple websites take 4-6 weeks, while complex web applications can take 3-6 months. We provide detailed timelines during our initial consultation."
-              },
-              {
-                question: "Do you provide ongoing support after project completion?",
-                answer: "Yes! We offer comprehensive maintenance packages including bug fixes, security updates, performance monitoring, and feature enhancements. Our support plans start at $500/month."
-              },
-              {
-                question: "What technologies do you specialize in?",
-                answer: "We specialize in modern web technologies including React, Next.js, Node.js, Python, AWS, and mobile development with React Native. We choose technologies based on your specific project requirements."
-              },
-              {
-                question: "Can you work with our existing development team?",
-                answer: "Absolutely! We often collaborate with in-house teams, providing specialized expertise, code reviews, mentoring, or handling specific components of larger projects."
-              },
-              {
-                question: "What's included in your project estimates?",
-                answer: "Our estimates include project planning, design, development, testing, deployment, documentation, and post-launch support. We provide detailed breakdowns so you know exactly what you're paying for."
-              }
-            ].map((faq, index) => (
+          <div className="space-y-6">
+            {faqData.map((faq, index) => (
               <div
                 key={index}
-                className="bg-white rounded-lg border border-slate-200 overflow-hidden"
+                className={`group relative overflow-hidden bg-white rounded-2xl border border-slate-200 shadow-lg hover:shadow-2xl transition-all duration-700 hover:-translate-y-2 ${
+                  openFaq === index ? 'ring-2 ring-indigo-500/20' : ''
+                }`}
+                style={{
+                  animationDelay: `${index * 150}ms`,
+                  transitionDelay: `${index * 100}ms`
+                }}
               >
+                {/* Gradient Background Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-br from-indigo-50/50 to-violet-50/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+                {/* Animated Border Glow */}
+                <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-indigo-500 to-violet-500 opacity-0 group-hover:opacity-20 blur-sm transition-all duration-500 scale-105" />
+
                 <button
                   onClick={() => setOpenFaq(openFaq === index ? null : index)}
-                  className="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-slate-50 transition-colors duration-300"
+                  className="relative z-10 w-full px-8 py-6 text-left flex items-center justify-between hover:bg-gradient-to-r hover:from-indigo-50/80 hover:to-violet-50/80 transition-all duration-500"
                 >
-                  <span className="font-semibold text-slate-900">{faq.question}</span>
-                  {openFaq === index ? (
-                    <FaChevronUp className="w-4 h-4 text-indigo-600" />
-                  ) : (
-                    <FaChevronDown className="w-4 h-4 text-slate-400" />
-                  )}
-                </button>
-                {openFaq === index && (
-                  <div className="px-6 pb-4">
-                    <p className="text-slate-600 text-sm leading-relaxed">{faq.answer}</p>
+                  <div className="flex items-center gap-6 flex-1">
+                    <div className="flex-shrink-0 w-14 h-14 rounded-2xl bg-gradient-to-r from-indigo-500 to-violet-500 flex items-center justify-center text-white text-2xl shadow-xl group-hover:scale-110 group-hover:rotate-6 transition-all duration-500">
+                      {faq.icon}
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="md:text-lg text-md font-bold text-slate-900 group-hover:text-indigo-700 transition-colors duration-500">
+                        {faq.question}
+                      </h3>
+                    </div>
                   </div>
-                )}
+                  <div className="flex-shrink-0 ml-6">
+                    <div className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-500 ${
+                      openFaq === index 
+                        ? 'bg-gradient-to-r from-indigo-500 to-violet-500 text-white shadow-lg transform rotate-180' 
+                        : 'bg-slate-100 text-slate-600 group-hover:bg-gradient-to-r group-hover:from-indigo-500 group-hover:to-violet-500 group-hover:text-white group-hover:scale-110'
+                    }`}>
+                      {openFaq === index ? (
+                        <FaChevronUp className="w-5 h-5" />
+                      ) : (
+                        <FaChevronDown className="w-5 h-5" />
+                      )}
+                    </div>
+                  </div>
+                </button>
+
+                {/* Animated Answer Section */}
+                <div className={`relative z-10 overflow-hidden transition-all duration-700 ease-in-out ${
+                  openFaq === index ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+                }`}>
+                  <div className="px-8 pb-8">
+                    <div className="border-t border-slate-200 pt-6">
+                      <p className="text-slate-600 leading-relaxed text-base">{faq.answer}</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Pulse Animation for Active FAQ */}
+                <div className={`absolute top-4 right-4 w-3 h-3 bg-gradient-to-r from-indigo-500 to-violet-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 ${
+                  openFaq === index ? 'opacity-100' : ''
+                }`}>
+                  <div className={`absolute inset-0 bg-gradient-to-r from-indigo-500 to-violet-500 rounded-full animate-ping`} />
+                </div>
+
+                {/* Bottom Accent Line */}
+                <div className={`absolute bottom-0 left-0 right-0 h-2 bg-gradient-to-r from-indigo-500 to-violet-500 transform transition-all duration-700 ${
+                  openFaq === index ? 'scale-x-100' : 'scale-x-0'
+                } origin-left`} />
               </div>
             ))}
           </div>
-        </div>
-      </section>
 
-      {/* FINAL CTA */}
-      <section className="py-12 md:py-20 bg-gradient-to-r from-indigo-50 to-violet-50">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <h3 className="text-xl md:text-2xl font-bold text-slate-900">Still Have Questions?</h3>
-          <p className="mt-3 text-slate-600">
-            Schedule a free 30-minute consultation to discuss your project requirements and get expert advice.
-          </p>
-          <div className="mt-8 flex flex-col sm:flex-row justify-center gap-4">
-            <Link
-              to="#"
-              className="inline-block px-8 py-4 rounded-lg bg-indigo-600 text-white font-semibold shadow-lg hover:scale-105 hover:shadow-xl transition-all duration-300"
-            >
-              Schedule Free Consultation
-            </Link>
-            <Link
-              to="/portfolio"
-              className="inline-block px-8 py-4 rounded-lg border border-slate-200 text-slate-700 hover:bg-white hover:shadow-lg transition-all duration-300"
-            >
-              View Our Portfolio
-            </Link>
+          {/* Additional Help CTA */}
+          <div className="mt-12 text-center  ">
+            <div className="bg-white rounded-2xl border border-slate-200 shadow-lg p-8  mx-auto">
+              <div className="w-16 h-16 bg-gradient-to-r from-indigo-500 to-violet-500 rounded-full flex items-center justify-center text-white text-2xl mx-auto mb-4 shadow-lg">
+                <FaLightbulb className="w-8 h-8" />
+              </div>
+              <h3 className="text-xl font-bold text-slate-900 mb-2">Still have questions?</h3>
+              <p className="text-slate-600 mb-6">
+                Can't find what you're looking for? Our team is here to help with any questions about our services.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <button
+                  onClick={scrollToForm}
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 hover:scale-105 transition-all duration-300 shadow-lg"
+                >
+                  <FaEnvelope className="w-4 h-4" />
+                  Ask a Question
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </section>

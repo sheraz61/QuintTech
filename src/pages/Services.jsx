@@ -16,8 +16,9 @@ import {
   FaCode,
   FaRobot,
   FaSearch,
-  FaArrowRight,
-  FaCheckCircle
+  FaServer,
+  FaChartBar
+
 } from "react-icons/fa";
 
 export default function Services() {
@@ -40,7 +41,7 @@ export default function Services() {
       to: "#8b5cf6",
       category: "development",
       features: ["React/Next.js", "Node.js APIs", "Database Design", "Authentication"],
-      price: "Starting at $5,000"
+  
     },
     {
       id: 2,
@@ -51,7 +52,7 @@ export default function Services() {
       to: "#fb923c",
       category: "development",
       features: ["React Native", "Flutter", "App Store Deployment", "Push Notifications"],
-      price: "Starting at $8,000"
+     
     },
     {
       id: 3,
@@ -62,7 +63,7 @@ export default function Services() {
       to: "#0ea5e9",
       category: "infrastructure",
       features: ["AWS/Azure/GCP", "Docker & Kubernetes", "CI/CD Pipelines", "Monitoring"],
-      price: "Starting at $3,000"
+   
     },
     {
       id: 4,
@@ -73,7 +74,7 @@ export default function Services() {
       to: "#fb7185",
       category: "data",
       features: ["Python/R", "ML Models", "Data Visualization", "ETL Pipelines"],
-      price: "Starting at $6,000"
+    
     },
     {
       id: 5,
@@ -84,7 +85,7 @@ export default function Services() {
       to: "#14b8a6",
       category: "design",
       features: ["Figma Design", "User Research", "Design Systems", "Prototyping"],
-      price: "Starting at $2,500"
+   
     },
     {
       id: 6,
@@ -95,8 +96,30 @@ export default function Services() {
       to: "#a855f7",
       category: "development",
       features: ["Shopify/WooCommerce", "Payment Integration", "Inventory Management", "Analytics"],
-      price: "Starting at $7,500"
-    }
+    
+    },
+    {
+      id: 7,
+      title: "Business Intelligence",
+      desc: "Interactive dashboards and BI solutions that transform raw data into decision-ready insights.",
+      icon: <FaChartBar className="w-6 h-6" />,
+      from: "#06b6d4",
+      to: "#3b82f6",
+      category: "data",
+      features: ["Power BI / Tableau", "KPI Tracking", "Data Warehousing", "Custom Dashboards"],
+    },
+    
+    {
+      id: 8,
+      title: "Big Data Solutions",
+      desc: "Scalable data platforms for processing and analyzing large, complex datasets efficiently.",
+      icon: <FaServer className="w-6 h-6" />,
+      from: "#10b981",
+      to: "#84cc16",
+      category: "data",
+      features: ["Hadoop / Spark", "Data Lakes", "Streaming Pipelines", "Cloud Data Services"],
+    },
+    
   ];
 
   // Additional services
@@ -142,11 +165,30 @@ export default function Services() {
   const categories = [
     { id: "all", label: "All Services" },
     { id: "development", label: "Development" },
-    { id: "design", label: "Design" },
-    { id: "infrastructure", label: "Infrastructure" },
     { id: "data", label: "Data & AI" }
   ];
-
+const process=[
+  { 
+    step: "01", 
+    title: "Planning", 
+    desc: "Define project goals, create architecture blueprints, set timelines, and allocate resources effectively." 
+  },
+  { 
+    step: "02", 
+    title: "Development", 
+    desc: "Agile development with sprint-based progress, regular updates, and client feedback integration." 
+  },
+  { 
+    step: "03", 
+    title: "Quality Assurance", 
+    desc: "Comprehensive testing for functionality, performance, and security to ensure a reliable product." 
+  },
+  { 
+    step: "04",
+    title: "Launch & Support", 
+    desc: "Smooth deployment, knowledge transfer, and ongoing support for scaling and improvements." 
+}
+]
   const filteredServices = activeCategory === "all"
     ? mainServices
     : mainServices.filter(service => service.category === activeCategory);
@@ -157,7 +199,7 @@ export default function Services() {
       <section className="pt-24 pb-12 md:pt-32 md:pb-16 bg-gradient-to-br from-slate-50 via-indigo-50/30 to-violet-50/20">
         <div className="max-w-7xl mx-auto px-6">
           <div className={`text-center transition-all duration-1000 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-            <h3 className="text-sm text-indigo-600 font-semibold tracking-wider uppercase">Our Services</h3>
+            <h3 className="text-sm text-indigo-600 font-semibold tracking-wider uppercase pt-12">Our Services</h3>
             <h1 className="mt-2 text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 bg-gradient-to-r from-indigo-900 to-slate-900 bg-clip-text text-transparent">
               Technology Solutions That Scale
             </h1>
@@ -201,7 +243,6 @@ export default function Services() {
               title={s.title}
               desc={s.desc}
               features={s.features}
-              price={s.price}
                />
               ))}
           </div>
@@ -247,12 +288,7 @@ export default function Services() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            {[
-              { step: "01", title: "Discovery", desc: "Understanding requirements, goals, and technical constraints." },
-              { step: "02", title: "Planning", desc: "Architecture design, timeline, and resource allocation." },
-              { step: "03", title: "Development", desc: "Agile development with regular updates and feedback." },
-              { step: "04", title: "Delivery", desc: "Testing, deployment, and ongoing support." }
-            ].map((phase, index) => (
+            {process.map((phase, index) => (
               <div
                 key={index}
                 className="text-center group"

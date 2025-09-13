@@ -3,7 +3,7 @@ import {
   FaCheckCircle
 } from "react-icons/fa";
 import { Link } from "react-router-dom";
-function MainServicesCard({serviceId, from, to, icon, tDelay, title, desc, features, price}) {
+function MainServicesCard({serviceId, from, to, icon, tDelay, title, desc, features}) {
   return (
             <article
                 key={serviceId}
@@ -50,9 +50,6 @@ function MainServicesCard({serviceId, from, to, icon, tDelay, title, desc, featu
 
                   {/* Price & CTA */}
                   <div className="mt-6 flex items-center justify-between">
-                    <span className="text-sm font-semibold text-indigo-600 group-hover:text-indigo-700 transition-colors duration-500">
-                      {price}
-                    </span>
                     <Link
                       to="/contact"
                       className="inline-flex items-center gap-1 text-xs font-medium text-slate-700 hover:text-indigo-600 group-hover:text-indigo-600 transition-colors duration-500"
